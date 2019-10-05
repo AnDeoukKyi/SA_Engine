@@ -7,7 +7,8 @@ public class Character1 extends SA_ObjM {
 
     public Character1() {
 
-        Create("케릭터", "character");
+        //Create("케릭터");
+        Create("케릭터1", "character1");
 
 
 

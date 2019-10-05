@@ -8,15 +8,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SA_ENGINE.Sys.Start.SA_StartRoom">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".SA_ENGINE.Sys.Room.SA_StartRoom">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".User.Room.Start"></activity>
     </application>
 
 </manifest>

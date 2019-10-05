@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">SA_Engine</string>
+
+
+
+
+    <string-array name="FLAG">
+        <item>Obj</item>
+        <item>VIEW</item>
+    </string-array>
+
+
+    <string-array name="Obj">
+        <item>view,0</item>
+    </string-array>
+
+    <string-array name="VIEW">
+        <item>portrait,0</item>
+        <item>landscape,1</item>
+    </string-array>
+
+
+
+
+
+
 </resources>

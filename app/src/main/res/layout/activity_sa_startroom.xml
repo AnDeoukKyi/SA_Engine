@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SA_ENGINE.Sys.Start.SA_StartRoom">
+    tools:context=".SA_ENGINE.Sys.Room.SA_StartRoom">
 
     <FrameLayout
         android:layout_width="match_parent"

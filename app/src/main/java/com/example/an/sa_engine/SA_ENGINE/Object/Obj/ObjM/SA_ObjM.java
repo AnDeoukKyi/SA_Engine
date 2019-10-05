@@ -29,5 +29,7 @@ public class SA_ObjM {
         engine.addObjM(this);
     }
 
-
+    public void Destroy(){
+        engine.deleteObjM(this);
+    }
 }

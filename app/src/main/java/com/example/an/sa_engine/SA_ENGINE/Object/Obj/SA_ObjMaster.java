@@ -1,23 +1,20 @@
 package com.example.an.sa_engine.SA_ENGINE.Object.Obj;
 
-import com.example.an.sa_engine.SA_ENGINE.Sys.Engine.SA_Engine;
+import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 public class SA_ObjMaster {
 
     private SA_Engine engine;
-    private HashMap<Integer, SA_Obj> HashMap_Obj;
+    private HashMap<Integer, Object> HashMap_Obj;
 
     public SA_ObjMaster(SA_Engine engine) {
         this.engine = engine;
         HashMap_Obj = new HashMap<>();
-        engine.setHashMap_Obj(HashMap_Obj);
     }
 
-    public void add(SA_Obj obj) {
+    public int add(Object obj) {
         int index = 1;
         while(true){
             if(!HashMap_Obj.containsKey(index)) {//0부터 해당키 있는지 탐색후 없으면 추가
@@ -25,16 +22,10 @@ public class SA_ObjMaster {
                 break;
             }
             index++;
-        }//hashmap등록
-
-        //부모자식관계 설정해야됨
-        //부모설정
-
-        //자식설정
-
-
-
+        }
+        return index;
     }
+
 
 //    private int search(SA_Obj obj){
 //        Iterator iterator = HashMap_Obj.entrySet().iterator();

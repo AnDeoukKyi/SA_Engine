@@ -10,14 +10,12 @@ public class Character1 extends SA_Obj {
 
     public String str = "Character1";
 
-    public Character1(){
+    public Character1(String name){
+        SA_Create(name);//인스턴스 생성(이름"name")
 
 
 
-        SA_Create(this, "캐릭터");
         //SA_SetChild(new Hand());
         //등록후 자식관계설정
-
-
     }
 }

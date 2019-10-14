@@ -1,43 +1,25 @@
 package com.example.an.sa_engine.SA_ENGINE.Object.Obj;
 
 
-import android.util.Log;
+import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
+import com.example.an.sa_engine.SA_ENGINE.System.Log.SA_Log;
 
-import com.example.an.sa_engine.SA_ENGINE.Sys.Engine.SA_Engine;
-import com.example.an.sa_engine.User.Instance.character.hand.finger.Finger;
-
-public class SA_Obj {
+public class SA_Obj extends SA_Log{
 
     private SA_Engine SA_engine;
     private int SA_id;
-    private String SA_name;
+    private String SA_ObjName;
     private String SA_tag = "";
-    private Class c;
 
 
 
     public SA_Obj() {
         SA_engine = SA_Engine.getEngine();
-        Log.e("gg", getClass().toString());
-
-
-
     }
 
-
-
-
-    protected void SA_Create(SA_Obj sa_obj, String name) {
-        c = sa_obj.getClass();
-
-        this.SA_name = name;
-        //SA_engine.SA_AddObj(this);
-
-
+    protected void SA_Create(String name) {
+        this.SA_ObjName = name;
+        Log("CreateObj", name + " 인스턴스가 생성되었습니다.");
+        this.SA_id = SA_engine.SA_AddObj(this);
     }
-
-    public Class toCast(Object obj){
-        return c.getClass().cast(obj);
-    }
-
 }

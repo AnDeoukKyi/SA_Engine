@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SA_ENGINE.Sys.Room.SA_StartRoom">
+    tools:context=".SA_ENGINE.System.Room.SA_StartRoom"
+    android:id="@+id/debugLayout">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.example.an.sa_engine.SA_ENGINE.Sys.Palette.SA_Palette
+        <com.example.an.sa_engine.SA_ENGINE.System.Palette.SA_Palette
             android:id="@+id/customView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

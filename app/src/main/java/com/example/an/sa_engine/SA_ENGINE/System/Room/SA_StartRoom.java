@@ -1,56 +1,51 @@
-package com.example.an.sa_engine.SA_ENGINE.Sys.Room;
+package com.example.an.sa_engine.SA_ENGINE.System.Room;
 
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+
 import com.example.an.sa_engine.R;
-import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
-import com.example.an.sa_engine.SA_ENGINE.Sys.Engine.SA_Engine;
-import com.example.an.sa_engine.User.Instance.character.Character1;
+import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
+import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 
 
 public class SA_StartRoom extends AppCompatActivity {
     private SA_Engine engine;
-    private SA_RoomManager roomManager;
 
 
+    private RelativeLayout debugLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Init();
         setContentView(R.layout.activity_sa_startroom);
-
-        roomManager = new SA_RoomManager();
-
-        Character1 c1 = new Character1();
-        Character1 c2 = new Character1();
-        Object o1 = c1;
-        SA_Obj o2 = c2;
-
-        Log.e("ggg", o1.getClass().getDeclaringClass().toString());
+        debugLayout = (RelativeLayout)findViewById(R.id.debugLayout);
 
 
-        //c1.cast(o1).str
-
-
+        new SA_RoomManager();
     }
 
 
     private void Init(){
         engine = SA_Engine.getEngine();
         engine.Init(this);
-        setViewType(engine.getFlag("USER", "view"));
+        setViewType(engine.getFlag("USER_VIEW_TYPE"));
 
     }//초기화진행
 
 
     private void setViewType(int viewType){
-        if(viewType == engine.getFlag("VIEW", "landscape")){
+        if(viewType == SA_FLAG.USER_VIEW_TYPE_LANDSCAPE){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }//가로모드, 세로모드 설정
+
+
+    public RelativeLayout getMain() {
+        return debugLayout;
+    }
 }

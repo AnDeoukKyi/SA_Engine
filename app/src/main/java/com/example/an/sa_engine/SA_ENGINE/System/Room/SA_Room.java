@@ -3,7 +3,7 @@ package com.example.an.sa_engine.SA_ENGINE.System.Room;
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import com.example.an.sa_engine.SA_ENGINE.System.Log.SA_Log;
 
-public class SA_Room extends SA_Log{
+public class SA_Room{
 
     private SA_Engine engine;
 

@@ -3,14 +3,12 @@ package com.example.an.sa_engine.SA_ENGINE.System.Engine;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.widget.RelativeLayout;
 
-import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_ObjMaster;
 import com.example.an.sa_engine.SA_ENGINE.System.Debug.SA_Debug;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
-import com.example.an.sa_engine.SA_ENGINE.System.Option.User.SA_UserFlag;
-import com.example.an.sa_engine.SA_ENGINE.System.Room.SA_StartRoom;
+import com.example.an.sa_engine.SA_ENGINE.System.Option.User.SA_UserOptionManager;
+import com.example.an.sa_engine.SA_ENGINE.System.Room.SA_RoomManager;
 
 import java.util.HashMap;
 
@@ -36,6 +34,8 @@ public class SA_Engine{//singleton
 
     private SA_ObjMaster objMaster;
 
+    private String packageName;
+
 
 
 
@@ -43,33 +43,31 @@ public class SA_Engine{//singleton
 
     //-----------------------확실
 
-    public void Init(Context context){
+    public void Init_1(Context context){
         this.context = context;
         this.resources = context.getResources();
         hashMap_Flag = new HashMap<>();
-        new SA_UserFlag().getHashMapFlag(this);
+        new SA_UserOptionManager().getHashMapFlag(this);
+        objMaster = new SA_ObjMaster(this);
+        packageName = context.getPackageName();
 
+    }
+
+    public void Init_2(){
         DisplayMetrics metrics = resources.getDisplayMetrics();
         windowWidth = metrics.widthPixels;
         windowHeight = metrics.heightPixels;
 
-        //WindowSize출력
+        //----------------------USER OPTION까지 가져옴
+
         CheckWindowSize();
 
-        //----------------------USER OPTION까지 가져옴
+
+        //화면출력해야됨
+
+
+
         DebugMode(CheckDebugMode());
-
-
-
-
-
-        objMaster = new SA_ObjMaster(this);
-
-
-
-
-
-
 
 
     }
@@ -77,9 +75,8 @@ public class SA_Engine{//singleton
 
 
 
-    public int SA_AddObj(Object obj){
-        int num = objMaster.add(obj);
-        return num;
+    public int SA_AddObj(Object obj, boolean child){
+        return objMaster.add(obj, child);
     }
 
 
@@ -100,11 +97,19 @@ public class SA_Engine{//singleton
 
 
     private void CheckWindowSize(){
-        if(getFlag("VIEW_WINDOWSIZE_X") == 0 || getFlag("VIEW_WINDOWSIZE_Y") == 0){
+        if(getFlag("USER_VIEW_WINDOWSIZE_X") != windowWidth || getFlag("USER_VIEW_WINDOWSIZE_Y") != windowHeight){
+            //Log.r("User-Option-Option.class의 View_WindowSize(0 0)을 View_WindowSize(1230, 300)으로 변경해주세요.");
+            //올스톱
+        }
+        else{
 
+            new SA_RoomManager();//룸메니저 생성->룸시작함
         }
     }
 
+    public SA_ObjMaster getObjMaster() {
+        return objMaster;
+    }
 
     public int getWindowWidth() {
         return windowWidth;
@@ -116,6 +121,10 @@ public class SA_Engine{//singleton
 
     public boolean isPrintWindowSize() {
         return printWindowSize;
+    }
+
+    public String getPackageName() {
+        return packageName;
     }
 
 

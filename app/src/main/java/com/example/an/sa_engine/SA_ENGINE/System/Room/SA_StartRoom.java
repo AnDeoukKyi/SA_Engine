@@ -23,15 +23,14 @@ public class SA_StartRoom extends AppCompatActivity {
         Init();
         setContentView(R.layout.activity_sa_startroom);
         debugLayout = (RelativeLayout)findViewById(R.id.debugLayout);
+        engine.Init_2();
 
-
-        new SA_RoomManager();
     }
 
 
     private void Init(){
         engine = SA_Engine.getEngine();
-        engine.Init(this);
+        engine.Init_1(this);
         setViewType(engine.getFlag("USER_VIEW_TYPE"));
 
     }//초기화진행

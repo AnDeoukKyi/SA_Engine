@@ -30,18 +30,11 @@ public class SA_Palette extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if(!printWindowSize){
-//            for(int i = 0; i<listObjMManager.size(); i++)
-//            listObjMManager.getObjM(i).draw(canvas);
-        }
-        else{
-            canvas.drawText("(" + Integer.toString(engine.getWindowWidth()) + "," + Integer.toString(engine.getWindowHeight()) + ")"
-            , engine.getWindowWidth()/2, engine.getWindowHeight()/2, paint);
-        }
+        engine.getObjMaster().draw(canvas);
+        canvas.drawText("(" + Integer.toString(engine.getWindowWidth()) + "," + Integer.toString(engine.getWindowHeight()) + ")"
+                , engine.getWindowWidth()/2, engine.getWindowHeight()/2, paint);
 
 
-//
-//
         invalidate();
 
     }

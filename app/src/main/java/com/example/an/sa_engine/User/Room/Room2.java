@@ -7,7 +7,7 @@ public class Room2 extends SA_Room{
 
     public Room2() {
 
-        Character1 c1 = new Character1("주인공");
+        Character1 c1 = new Character1("주인공", null);
         //setTile()//배경타일설정
         //RoomManager();
         //new Character1();

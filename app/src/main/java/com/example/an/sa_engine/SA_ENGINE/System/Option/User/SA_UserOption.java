@@ -12,8 +12,8 @@ public abstract class SA_UserOption{
     private HashMap<String, Integer> hashMap_UserOption;
 
     //user_use
-    protected int portrait;
-    protected int landscape;
+    protected int SA_PORTRAIT;
+    protected int SA_LANDSCAPE;
 
 
     public SA_UserOption() {
@@ -23,8 +23,8 @@ public abstract class SA_UserOption{
     }
 
     private void Init(){
-        portrait = SA_FLAG.USER_VIEW_TYPE_PORTRAIT;
-        landscape = SA_FLAG.USER_VIEW_TYPE_LANDSCAPE;
+        SA_PORTRAIT = SA_FLAG.USER_VIEW_TYPE_PORTRAIT;
+        SA_LANDSCAPE = SA_FLAG.USER_VIEW_TYPE_LANDSCAPE;
     }//초기화 진행
 
 

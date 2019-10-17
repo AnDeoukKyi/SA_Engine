@@ -19,5 +19,14 @@ public class SA_FLAG {
 
 
 
+    public static final int ENGINE_DRAW_SPRITE_CREATE = 0x10000000;
+    public static final int ENGINE_DRAW_RECT_CREATE = 0x10100000;
+    public static final int ENGINE_DRAW_LINE_CREATE = 0x10200000;
+    public static final int ENGINE_DRAW_TEXT_CREATE = 0x10300000;
+    public static final int ENGINE_DRAW_OPTION_EDGE = 0x10400000;
+    public static final int ENGINE_DRAW_OPTION_FILL = 0x10400001;
 
+
+    public static final int ELSE_POS_NOTHING = 0x21000000;
+    public static final int ELSE_POS_CENTER = 0x21000001;
 }

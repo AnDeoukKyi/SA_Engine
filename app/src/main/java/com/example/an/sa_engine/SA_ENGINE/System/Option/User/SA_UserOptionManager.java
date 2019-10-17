@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-public class SA_UserFlag {
+public class SA_UserOptionManager {
 
     private HashMap<String, Integer> hashMap_Flag;
     private SA_Engine engine;

@@ -7,8 +7,12 @@ public class Foot extends SA_Obj {
 
     public String a = "Foot";
 
-    public Foot() {
+    public Foot(String name, Object parent) {
+        SA_Create(name, parent);//인스턴스 생성(이름"name")
 
+    }
 
+    public Foot SA_Cast(Object obj){//필수
+        return (Foot)obj;
     }
 }

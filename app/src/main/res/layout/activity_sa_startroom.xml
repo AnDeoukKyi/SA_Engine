@@ -13,8 +13,9 @@
         <com.example.an.sa_engine.SA_ENGINE.System.Palette.SA_Palette
             android:id="@+id/customView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff"/>
+            android:layout_height="match_parent"/>
     </FrameLayout>
+
+
 
 </RelativeLayout>

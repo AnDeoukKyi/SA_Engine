@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.SA_Draw;
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.SA_DrawManager;
+import com.example.an.sa_engine.SA_ENGINE.Object.Mask.SA_Mask;
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 import android.graphics.Color;
@@ -26,8 +27,8 @@ public class SA_Obj{
 
     //user_use
 
-    protected int SA_CAMERA_WIDTH;
-    protected int SA_CAMERA_HEIGHT;
+    protected int SA_CAMERA_ENDX;
+    protected int SA_CAMERA_ENDY;
     protected int SA_CAMERA_CENTERX;
     protected int SA_CAMERA_CENTERY;
 
@@ -39,6 +40,11 @@ public class SA_Obj{
     protected int SA_EDGE;
 
 
+    protected int SA_MASK_RECT;
+    protected int SA_MASK_CIRCLE;
+    protected int SA_MASK_AUTO;
+
+
 
 
 
@@ -46,12 +52,20 @@ public class SA_Obj{
     public SA_Obj() {
         SA_engine = SA_Engine.getEngine();
 
-        SA_CAMERA_WIDTH = SA_engine.getWindowWidth();
-        SA_CAMERA_HEIGHT = SA_engine.getWindowHeight();
+        SA_CAMERA_ENDX = SA_engine.getWindowWidth();
+        SA_CAMERA_ENDY = SA_engine.getWindowHeight();
         SA_CAMERA_CENTERX = SA_engine.getWindowWidth()/2;
         SA_CAMERA_CENTERY = SA_engine.getWindowHeight()/2;
 
         SA_EDGE = SA_FLAG.ENGINE_DRAW_OPTION_EDGE;
+
+
+
+        //MASK
+        SA_MASK_RECT = SA_FLAG.ENGINE_MASK_CREATE_RECT;
+        SA_MASK_CIRCLE = SA_FLAG.ENGINE_MASK_CREATE_CIRCLE;
+        SA_MASK_AUTO = SA_FLAG.ENGINE_MASK_CREATE_AUTO;
+
 
 
     }
@@ -91,7 +105,7 @@ public class SA_Obj{
 
     }
 
-    protected void SA_Draw_Camera_SpriteCenter(String name, String sprite, int deep, int index, double speed, int centerX, int centerY, int width, int height){
+    protected SA_Draw SA_Draw_Camera_SpriteCenter(String name, String sprite, int deep, int index, double speed, int centerX, int centerY, int width, int height){
         //스프라이트, index, speed, x, y, alpha
         //index = 해당 인덱스부터 재생
         //index =  음수 -> 해당 인덱스부터 역재생
@@ -102,8 +116,9 @@ public class SA_Obj{
 
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        drawManager.add(new SA_Draw(SA_FLAG.ENGINE_DRAW_SPRITE_CREATE, SA_FLAG.ELSE_POS_CENTER, SA_engine, name, sprite, deep, index, speed, centerX, centerY, width, height));
-
+        SA_Draw sa_draw = new SA_Draw(SA_FLAG.ENGINE_DRAW_SPRITE_CREATE, SA_FLAG.ELSE_POS_CENTER, SA_engine, name, sprite, deep, index, speed, centerX, centerY, width, height);
+        drawManager.add(sa_draw);
+        return sa_draw;
     }
 
 
@@ -115,19 +130,31 @@ public class SA_Obj{
 
     //rect
 
-    protected void SA_Draw_Camera_RectCenter(String name, int deep, int drawOption, int centerX, int centerY, int width, int height, int color, int thickness){
+    protected SA_Draw SA_Draw_Camera_RectCenter(String name, int deep, int drawOption, int centerX, int centerY, int width, int height, int color, int thickness){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        drawManager.add(new SA_Draw(SA_FLAG.ENGINE_DRAW_RECT_CREATE, SA_FLAG.ELSE_POS_CENTER, name, deep, drawOption, centerX, centerY, width, height, color, thickness));
+        SA_Draw sa_draw = new SA_Draw(SA_FLAG.ENGINE_DRAW_RECT_CREATE, SA_FLAG.ELSE_POS_CENTER, name, deep, drawOption, centerX, centerY, width, height, color, thickness);
+        drawManager.add(sa_draw);
+        return sa_draw;
     }
 
 
 
 
-    protected void SA_Draw_Camera_Line(String name, int deep, int startX, int startY, int endX, int endY, int color, int thickness){
+    protected SA_Draw SA_Draw_Camera_Line(String name, int deep, int startX, int startY, int endX, int endY, int color, int thickness){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        drawManager.add(new SA_Draw(SA_FLAG.ENGINE_DRAW_LINE_CREATE, SA_FLAG.ELSE_POS_NOTHING, name, deep, startX, startY, endX, endY, color, thickness));
+        SA_Draw sa_draw = new SA_Draw(SA_FLAG.ENGINE_DRAW_LINE_CREATE, SA_FLAG.ELSE_POS_NOTHING, name, deep, startX, startY, endX, endY, color, thickness);
+        drawManager.add(sa_draw);
+        return sa_draw;
+    }
+
+
+
+
+
+    protected void SA_Mask(String name, int maskType){
+        drawManager.search(name).SetMask(maskType);
     }
 
 

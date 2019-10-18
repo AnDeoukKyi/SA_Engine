@@ -22,9 +22,7 @@ public class SA_StartRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Init();
         setContentView(R.layout.activity_sa_startroom);
-        debugLayout = (RelativeLayout)findViewById(R.id.debugLayout);
         engine.Init_2();
-
     }
 
 
@@ -42,9 +40,4 @@ public class SA_StartRoom extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
     }//가로모드, 세로모드 설정
-
-
-    public RelativeLayout getMain() {
-        return debugLayout;
-    }
 }

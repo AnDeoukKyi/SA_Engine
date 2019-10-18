@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
+import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 
 public class SA_Palette extends View {
 
@@ -39,9 +41,21 @@ public class SA_Palette extends View {
 
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//
-//        return true;
-//    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch(event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                engine.SA_Touch(SA_FLAG.ENGINE_CLICK_DOWN, (int)event.getX(), (int)event.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                engine.SA_Touch(SA_FLAG.ENGINE_CLICK_UP, (int)event.getX(), (int)event.getY());
+                break;
+            case MotionEvent.ACTION_MOVE:
+                engine.SA_Touch(SA_FLAG.ENGINE_CLICK_DRAG, (int)event.getX(), (int)event.getY());
+                break;
+        }
+
+        return true;
+    }
 }

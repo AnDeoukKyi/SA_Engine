@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.Shape.SA_Draw_Shape;
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.Sprite.SA_Draw_Sprite;
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.Text.SA_Draw_Text;
+import com.example.an.sa_engine.SA_ENGINE.Object.Mask.SA_Mask;
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 
@@ -21,6 +22,7 @@ public class SA_Draw {
     private int drawOption;
     private int drawPosOption;
     private Paint paint;
+    private SA_Mask mask;
 
 
     public SA_Draw(Object... obj) {
@@ -72,6 +74,14 @@ public class SA_Draw {
     }
 
 
+
+    public void SetMask(int maskFlag){
+        mask = new SA_Mask(this, maskFlag);
+    }
+
+
+
+
     public void draw(Canvas canvas){
         switch(drawType){
             case SA_FLAG.ENGINE_DRAW_SPRITE_CREATE:
@@ -103,5 +113,21 @@ public class SA_Draw {
 
     public int getDrawType() {
         return drawType;
+    }
+
+    public SA_Draw_Shape getShape() {
+        return shape;
+    }
+
+    public SA_Draw_Sprite getSprite() {
+        return sprite;
+    }
+
+    public SA_Draw_Text getText() {
+        return text;
+    }
+
+    public String getName() {
+        return name;
     }
 }

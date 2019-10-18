@@ -8,7 +8,7 @@ public class RoomManager extends SA_Room{
 
     public RoomManager() {
         //setEffect
-        roomMove(new Room1());
+        SA_RoomMove(new Room1());
 
 
 

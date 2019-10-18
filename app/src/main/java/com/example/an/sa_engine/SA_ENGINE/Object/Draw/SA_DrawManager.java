@@ -36,4 +36,11 @@ public class SA_DrawManager {
         for(int i = 0; i<AL_Draw.size(); i++)
             ((SA_Draw)AL_Draw.get(i)).draw(canvas);
     }
+
+    public SA_Draw search(String name) {
+        for(int i = 0; i<AL_Draw.size(); i++)
+            if(((SA_Draw)AL_Draw.get(i)).getName().equals(name))
+                return (SA_Draw)AL_Draw.get(i);
+        return null;
+    }
 }

@@ -27,6 +27,18 @@ public class SA_FLAG {
     public static final int ENGINE_DRAW_OPTION_FILL = 0x10400001;
 
 
+    public static final int ENGINE_MASK_CREATE_RECT = 0x11000000;
+    public static final int ENGINE_MASK_CREATE_CIRCLE = 0x11000001;
+    public static final int ENGINE_MASK_CREATE_AUTO = 0x11000002;
+    public static final int ENGINE_MASK_CREATE_CUSTOM = 0x11000003;
+
+
+
+    public static final int ENGINE_CLICK_DOWN = 0x12000000;
+    public static final int ENGINE_CLICK_UP = 0x12000001;
+    public static final int ENGINE_CLICK_DRAG = 0x12000002;
+
+
     public static final int ELSE_POS_NOTHING = 0x21000000;
     public static final int ELSE_POS_CENTER = 0x21000001;
 }

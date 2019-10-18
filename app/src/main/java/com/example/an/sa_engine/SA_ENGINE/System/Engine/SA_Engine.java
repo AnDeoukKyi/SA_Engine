@@ -3,6 +3,7 @@ package com.example.an.sa_engine.SA_ENGINE.System.Engine;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_ObjMaster;
 import com.example.an.sa_engine.SA_ENGINE.System.Debug.SA_Debug;
@@ -31,6 +32,12 @@ public class SA_Engine{//singleton
 
 
         //
+
+
+    //click
+    private Object clickObj;
+
+    //
 
     private SA_ObjMaster objMaster;
 
@@ -71,6 +78,39 @@ public class SA_Engine{//singleton
 
 
     }
+
+
+    //터치
+    public void SA_Touch(int touchFlag, int x, int y){
+
+        Object touch = Touch_Obj(x, y);
+
+        Log.e("asdf", Integer.toString(x) + "," + Integer.toString(y));
+
+        switch(touchFlag){
+            case SA_FLAG.ENGINE_CLICK_DOWN:
+                clickObj = touch;
+                //flag 변경(focus)
+                break;
+            case SA_FLAG.ENGINE_CLICK_UP:
+                clickObj = null;
+                //flag 변경(focus)
+                break;
+            case SA_FLAG.ENGINE_CLICK_DRAG:
+                break;
+        }
+
+
+    }
+
+    private Object Touch_Obj(int x, int y){
+        //find obj
+
+        return null;
+    }
+
+    //
+
 
 
 

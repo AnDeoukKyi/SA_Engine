@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import com.example.an.sa_engine.SA_ENGINE.Object.Mask.SA_Mask;
 import com.example.an.sa_engine.SA_ENGINE.Object.Mask.SA_MaskPoint;
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
+import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 
 import java.util.ArrayList;
@@ -105,8 +106,8 @@ public class SA_Draw {
             relative.x = 0;
             relative.y = 0;
             obj.parentPos(relative);
-            relativeX = obj.getX();
-            relativeY = obj.getY();
+            relative.x -= SA_Engine.getEngine().cameraX;
+            relative.y -= SA_Engine.getEngine().cameraY;
         }
         switch(drawType){
             case SA_FLAG.ENGINE_DRAW_SPRITE_CREATE:
@@ -220,8 +221,14 @@ public class SA_Draw {
         return name;
     }
 
-    public String checkClick(int clickX, int clickY, int relX, int relY) {
-        if(mask.getMaskManager().checkClick(clickX-relX, clickY-relY))
+    public String checkClick(int clickX, int clickY) {
+
+        Point p = new Point(0, 0);
+        obj.parentPos(p);
+        p.x -= SA_Engine.getEngine().cameraX;
+        p.y -= SA_Engine.getEngine().cameraY;
+        //카메라보다 초과범위면 클릭 검사안함------------------------------------------------------------------
+        if(mask.getMaskManager().checkClick(clickX - p.x, clickY - p.y))
             return name;
 
         return null;

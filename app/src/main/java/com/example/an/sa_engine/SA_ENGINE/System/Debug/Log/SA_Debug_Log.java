@@ -27,7 +27,10 @@ public class SA_Debug_Log extends SA_Obj{
             SA_Draw_Line_Camera_Point("선", 9, 0, i*100, SA_CAMERA_ENDX, i*100, SA_COLOR_BLACK, 3);
         }
 
-        SA_Draw_Sprite_Center("asdf", "sprite0", 10, 0, 0, 0, 0, 200, 200);
+
+
+
+        SA_Draw_Sprite_Camera_Center("asdf", "sprite0", 10, 0, 0, 0, 0, 200, 200);
         SA_Mask("asdf", SA_MASK_AUTO);
         SA_Click("asdf", new SA_Debug_Log_Click());
 

@@ -51,6 +51,7 @@ public class SA_Engine{//singleton
 
 
 
+    public int cameraX = 100, cameraY = 100;
 
 
 
@@ -76,6 +77,18 @@ public class SA_Engine{//singleton
 
         //화면출력해야됨
 
+//        new Thread(new Runnable() {
+//            public void run() {
+//                while (true) {
+//                    try {
+//                        cameraX--;
+//                        cameraY--;
+//                        Thread.sleep(10);
+//                    } catch (Throwable t) {
+//                    }
+//                }
+//            }
+//        }).start();
 
 
 
@@ -173,7 +186,7 @@ public class SA_Engine{//singleton
                         preClickY = clickY;
                         drag = true;
                         //드래그
-                        Log.e("드래그중", Integer.toString(clickX) + "," + Integer.toString(clickY));
+                        //Log.e("드래그중", Integer.toString(clickX) + "," + Integer.toString(clickY));
                     }
                 break;
         }

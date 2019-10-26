@@ -1,6 +1,7 @@
 package com.example.an.sa_engine.SA_ENGINE.Object.Obj;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 
@@ -38,7 +39,7 @@ public class SA_ObjMaster {
     }
 
     public void click(int clickX, int clickY) {
-        objManager.checkClick(clickX, clickY, 0, 0);
+        objManager.checkClick(clickX, clickY);
     }
 
 

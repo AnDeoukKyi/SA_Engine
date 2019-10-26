@@ -27,15 +27,10 @@ public class SA_ObjManager {
         }
     }
 
-    public boolean checkClick(int clickX, int clickY, int relX, int relY) {
-        int objX = 0, objY = 0;
-        if(parent != null){
-            objX = ((SA_Obj)parent).getX() + relX;
-            objY = ((SA_Obj)parent).getX() + relY;
-        }
+    public boolean checkClick(int clickX, int clickY) {
         for(int i = 0; i<AL_Obj.size(); i++) {
             //여기서 더탐색해야됨
-            if(((SA_Obj) AL_Obj.get(i)).checkClick(clickX, clickY, objX, objY))
+            if(((SA_Obj) AL_Obj.get(i)).checkClick(clickX, clickY))
                 return true;
         }
         return false;

@@ -270,9 +270,10 @@ public class SA_Obj implements Essential{
     }
 
     public void draw(Canvas canvas) {
-        drawManager.draw(canvas);
         if(child != null)
             child.draw(canvas);
+        if(drawManager != null)
+            drawManager.draw(canvas);
     }
 
     public int getX() {
@@ -283,26 +284,26 @@ public class SA_Obj implements Essential{
         return y;
     }
 
-    public boolean checkClick(int clickX, int clickY, int objX, int objY) {
+    public boolean checkClick(int clickX, int clickY) {
         String click = null;
-        if(drawManager != null)
-            click = drawManager.checkClick(clickX, clickY, objX, objY);
+        if(drawManager != null){
+            click = drawManager.checkClick(clickX, clickY);
+        }
         click = click;
         if(click == null){
             //더탐색
             if(child == null) return false;
-
-            return child.checkClick(clickX, clickY, 0, 0);
+            return child.checkClick(clickX, clickY);
         }
         else{
             //실행
             try {
                 Object clickObject = hashMap_ClickListener.get(click);
-                Method method = clickObject.getClass().getDeclaredMethod("Click");
+                Method method = clickObject.getClass().getDeclaredMethod("Click", Object.class);
                 method.setAccessible(true);
-                method.invoke(clickObject);
+                method.invoke(clickObject, this);
 
-                Log.e(click, "크크크크크크크");
+                Log.e(click, "크크크크크크크" + click);
                 return true;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

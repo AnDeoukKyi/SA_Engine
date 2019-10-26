@@ -10,8 +10,8 @@ public class SA_Debug_Log2 extends SA_Obj{
         super._Create("디버그로그2");
         //이름, 태그 설정
 
-        x = 270;
-        y = 270;
+        x = 300;
+        y = 300;
 
     }
 
@@ -20,7 +20,7 @@ public class SA_Debug_Log2 extends SA_Obj{
         super._Draw();
         SA_Draw_Sprite_Center("asdf2", "sprite0", 10, 0, 0, 0, 0, 200, 200);
         SA_Mask("asdf2", SA_MASK_AUTO);
-        //SA_Click("asdf2", new SA_Debug_Log_Click());
+        SA_Click("asdf2", new SA_Debug_Log_Click());
 
         int a = 10;
 

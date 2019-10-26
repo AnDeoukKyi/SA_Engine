@@ -1,6 +1,7 @@
 package com.example.an.sa_engine.SA_ENGINE.Object.Draw;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 
@@ -46,10 +47,11 @@ public class SA_DrawManager {
         return null;
     }
 
-    public String checkClick(int clickX, int clickY, int relX, int relY){
+    public String checkClick(int clickX, int clickY){
+
         for(int i = 0; i<AL_Draw.size(); i++){
             if(((SA_Draw)AL_Draw.get(i)).isClick()){
-                return ((SA_Draw)AL_Draw.get(i)).checkClick(clickX, clickY, relX, relY);
+                return ((SA_Draw)AL_Draw.get(i)).checkClick(clickX, clickY);
             }
         }
         return null;

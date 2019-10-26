@@ -3,8 +3,10 @@ package com.example.an.sa_engine.SA_ENGINE.System.Room;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.an.sa_engine.R;
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
@@ -23,6 +25,7 @@ public class SA_StartRoom extends AppCompatActivity {
         Init();
         setContentView(R.layout.activity_sa_startroom);
         engine.Init_2();
+
     }
 
 

@@ -7,25 +7,27 @@ import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class SA_DrawManager {
 
-    private ArrayList<Object> AL_Draw;
+    private ArrayList<SA_Draw> AL_Draw;
 
     public SA_DrawManager() {
         AL_Draw = new ArrayList<>();
     }
 
 
-    public void add(Object obj){
-        AL_Draw.add(obj);
+    public SA_Draw add(SA_Draw draw){
+        AL_Draw.add(draw);
         deepSort();
+        return draw;
     }
 
     private void deepSort(){
-        Comparator<Object> cmpDeep = new Comparator<Object>() {
+        Comparator<SA_Draw> cmpDeep = new Comparator<SA_Draw>() {
             @Override
-            public int compare(Object draw1, Object draw2) {
+            public int compare(SA_Draw draw1, SA_Draw draw2) {
                 return ((SA_Draw)draw1).getDeep() - ((SA_Draw)draw2).getDeep();
             }
         };
@@ -41,6 +43,15 @@ public class SA_DrawManager {
         for(int i = 0; i<AL_Draw.size(); i++)
             if(((SA_Draw)AL_Draw.get(i)).getName().equals(name))
                 return (SA_Draw)AL_Draw.get(i);
+        return null;
+    }
+
+    public String checkClick(int clickX, int clickY, int relX, int relY){
+        for(int i = 0; i<AL_Draw.size(); i++){
+            if(((SA_Draw)AL_Draw.get(i)).isClick()){
+                return ((SA_Draw)AL_Draw.get(i)).checkClick(clickX, clickY, relX, relY);
+            }
+        }
         return null;
     }
 }

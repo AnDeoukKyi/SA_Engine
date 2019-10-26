@@ -26,6 +26,9 @@ public class SA_FLAG {
     public static final int ENGINE_DRAW_OPTION_EDGE = 0x10400000;
     public static final int ENGINE_DRAW_OPTION_FILL = 0x10400001;
 
+    public static final int ENGINE_DRAW_OPTION_RELATIVE = 0x10400002;
+    public static final int ENGINE_DRAW_OPTION_CAMERA = 0x10400003;
+
 
     public static final int ENGINE_MASK_CREATE_RECT = 0x11000000;
     public static final int ENGINE_MASK_CREATE_CIRCLE = 0x11000001;
@@ -39,6 +42,7 @@ public class SA_FLAG {
     public static final int ENGINE_CLICK_DRAG = 0x12000002;
 
 
-    public static final int ELSE_POS_NOTHING = 0x21000000;
-    public static final int ELSE_POS_CENTER = 0x21000001;
+    public static final int PARAM_POS_POINT2POINT = 0x21000000;
+    public static final int PARAM_POS_LENGTH = 0x21000001;
+    public static final int PARAM_POS_CENTER = 0x21000002;
 }

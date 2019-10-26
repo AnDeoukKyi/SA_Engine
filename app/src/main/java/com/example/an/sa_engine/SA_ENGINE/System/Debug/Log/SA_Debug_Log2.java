@@ -2,34 +2,25 @@ package com.example.an.sa_engine.SA_ENGINE.System.Debug.Log;
 
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
 
-public class SA_Debug_Log extends SA_Obj{
+public class SA_Debug_Log2 extends SA_Obj{
+
 
     @Override
     public void _Create(String name) {
-        super._Create("디버그로그");
+        super._Create("디버그로그2");
         //이름, 태그 설정
-        SA_RootParent(true);
-        SA_Child(new SA_Debug_Log1());
 
-        x = 100;
-        y = 100;
+        x = 270;
+        y = 270;
 
     }
 
     @Override
     public void _Draw() {
         super._Draw();
-        for(int i = 0; i<=SA_CAMERA_ENDX/100; i++){
-            SA_Draw_Line_Camera_Point("선", 9, i*100, 0, i*100, SA_CAMERA_ENDY, SA_COLOR_BLACK, 3);
-        }
-
-        for(int i = 0; i<=SA_CAMERA_ENDY/100; i++){
-            SA_Draw_Line_Camera_Point("선", 9, 0, i*100, SA_CAMERA_ENDX, i*100, SA_COLOR_BLACK, 3);
-        }
-
-        SA_Draw_Sprite_Center("asdf", "sprite0", 10, 0, 0, 0, 0, 200, 200);
-        SA_Mask("asdf", SA_MASK_AUTO);
-        SA_Click("asdf", new SA_Debug_Log_Click());
+        SA_Draw_Sprite_Center("asdf2", "sprite0", 10, 0, 0, 0, 0, 200, 200);
+        SA_Mask("asdf2", SA_MASK_AUTO);
+        //SA_Click("asdf2", new SA_Debug_Log_Click());
 
         int a = 10;
 

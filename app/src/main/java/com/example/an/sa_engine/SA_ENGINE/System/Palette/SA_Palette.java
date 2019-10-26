@@ -33,8 +33,8 @@ public class SA_Palette extends View {
         super.onDraw(canvas);
 
         engine.getObjMaster().draw(canvas);
-        canvas.drawText("(" + Integer.toString(engine.getWindowWidth()) + "," + Integer.toString(engine.getWindowHeight()) + ")"
-                , engine.getWindowWidth()/2, engine.getWindowHeight()/2, paint);
+//        canvas.drawText("(" + Integer.toString(engine.getWindowWidth()) + "," + Integer.toString(engine.getWindowHeight()) + ")"
+//                , engine.getWindowWidth()/2, engine.getWindowHeight()/2, paint);
 
 
         invalidate();

@@ -7,7 +7,7 @@ public class SA_WindowSize extends SA_Obj{
 
     public SA_WindowSize(String name, Object parent) {
 
-        SA_Create(name, null);//인스턴스 생성(이름"name")
+        //SA_Create_Child(name, null);//인스턴스 생성(이름"name")
         //SA_Draw_Text(false, SA_CenterX, SA_CenterY, );
         //draw_Text();
 

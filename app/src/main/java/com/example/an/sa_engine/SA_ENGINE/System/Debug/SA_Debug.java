@@ -24,8 +24,19 @@ public class SA_Debug {
 
 
         //아래 로그창
-        debug_log = new SA_Debug_Log("Log", null);
+        debug_log = new SA_Debug_Log();
 
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        debug_log.test();
+                        Thread.sleep(10);
+                    } catch (Throwable t) {
+                    }
+                }
+            }
+        }).start();
         //왼쪽위 인스턴스 이름
         //오른쪽 인스턴스 리스트
         //왼쪽 리스트 인스턴스 정보창

@@ -1,51 +1,43 @@
 package com.example.an.sa_engine.SA_ENGINE.Object.Mask;
 
-import android.graphics.Point;
-
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.SA_Draw;
-import com.example.an.sa_engine.SA_ENGINE.Object.Draw.Shape.SA_Draw_Shape;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
-
-import java.util.ArrayList;
 
 public class SA_Mask {
 
-    private ArrayList<SA_MaskPoint> point = new ArrayList<>();
-    private ArrayList<SA_MaskNode> node = new ArrayList<>();
-    private int centerX, centerY;
+    //오른쪽 아래가 true
+    private SA_Draw draw;
+    private SA_MaskManager maskManager = new SA_MaskManager();
+    private int relativeX, relativeY;
+    //realtiveX,Y 얼마만큼 평행이동했는지 나옴 나중에 역계산할때 더하면 실제 출력좌표 나옴
 
-    public SA_Mask(SA_Draw draw, int maskFlag) {
-        switch(maskFlag){
+
+    public SA_Mask(SA_Draw draw, int maskType) {
+        this.draw = draw;
+        switch(maskType){
             case SA_FLAG.ENGINE_MASK_CREATE_AUTO:
-                setPoint(draw.getDrawType(), draw.getShape());
+                setPoint();
                 break;
         }
-        setNode();
+        maskManager.setNode();
     }
 
-
-    private void setPoint(Object... obj){
-        //SA_Draw_Shape rect
-        switch ((int)obj[0]) {
+    private void setPoint(){
+        switch (draw.getDrawType()) {
+            case SA_FLAG.ENGINE_DRAW_SPRITE_CREATE:
             case SA_FLAG.ENGINE_DRAW_RECT_CREATE:
-                SA_Draw_Shape rect = (SA_Draw_Shape)obj[1];
-                centerX = rect.getCenterX();
-                centerY = rect.getCenterY();
-                point.add(new SA_MaskPoint(rect.getStartX(), rect.getStartY()));
-                point.add(new SA_MaskPoint(rect.getEndX(), rect.getStartY()));
-                point.add(new SA_MaskPoint(rect.getEndX(), rect.getEndY()));
-                point.add(new SA_MaskPoint(rect.getStartX(), rect.getEndY()));
+                maskManager.add(draw.getStartX(), draw.getStartY());
+                maskManager.add(draw.getEndX(), draw.getStartY());
+                maskManager.add(draw.getEndX(), draw.getEndY());
+                maskManager.add(draw.getStartX(), draw.getEndY());
                 break;
         }
+        maskManager.setRelative();
+        relativeX = maskManager.getRelativeX();
+        relativeY = maskManager.getRelativeY();
     }
 
-    private void setNode(){
-        int i1;
-        for(int i = 0; i<point.size(); i++){
-            i1 = i+1;
-            if(i+1 >= point.size())
-                i1 = 0;
-            node.add(new SA_MaskNode(point.get(i), point.get(i1), centerX, centerY));
-        }
+    public SA_MaskManager getMaskManager() {
+        return maskManager;
     }
 }

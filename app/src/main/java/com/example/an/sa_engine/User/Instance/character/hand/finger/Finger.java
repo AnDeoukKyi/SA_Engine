@@ -8,7 +8,7 @@ public class Finger extends SA_Obj {
     public String a = "Finger";
 
     public Finger(String name, Object parent) {
-        SA_Create(name, parent);//인스턴스 생성(이름"name")
+        //SA_Create_Child(name, parent);//인스턴스 생성(이름"name")
 
     }
 

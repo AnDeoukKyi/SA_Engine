@@ -10,7 +10,7 @@ public class Hand extends SA_Obj {
 
 
     public Hand(String name, Object parent) {
-        SA_Create(name, parent);//인스턴스 생성(이름"name")
+        //SA_Create_Child(name, parent);//인스턴스 생성(이름"name")
         SA_Child(new Finger("손까락", this));
 
     }

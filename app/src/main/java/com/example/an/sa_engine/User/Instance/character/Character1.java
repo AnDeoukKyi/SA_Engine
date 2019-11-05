@@ -7,15 +7,34 @@ import com.example.an.sa_engine.User.Instance.character.hand.Hand;
 
 public class Character1 extends SA_Obj {
 
-    public String str = "Character1";
 
-    public Character1(String name, Object parent){//필수
-        //SA_Create_Child(name, null);//인스턴스 생성(이름"name")
-        SA_Child(new Hand("손", this));
-        SA_Child(new Foot("발", this));
+    int a = 0, b = 0;
+    @Override
+    public void _Create(String name) {
+        super._Create("케릭터");
+        SA_RootParent(true);
+        SetPos(1000, 1000);
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        SetPos(1200-a, 1200-b);
+                        Thread.sleep(10);
+                        a++;
+                        b++;
+                    } catch (Throwable t) {
+                    }
+                }
+            }
+        }).start();
     }
 
-    public Character1 SA_Cast(Object obj){//필수
-        return (Character1)obj;
+    @Override
+    public void _Draw() {
+        super._Draw();
+        SA_Draw_Sprite("케릭터", "sprite0", 20, 0, 0, 0, 0, 100, 100, "pos=m/c");
+
+
+        int k = 0;
     }
 }

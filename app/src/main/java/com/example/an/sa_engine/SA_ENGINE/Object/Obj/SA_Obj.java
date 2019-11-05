@@ -13,7 +13,6 @@ import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SA_Obj implements Essential{
@@ -29,8 +28,9 @@ public class SA_Obj implements Essential{
     private boolean rootParent = false;
 
 
-    protected int x = 0;
-    protected int y = 0;
+    protected Point pos = new Point(0, 0);
+    //protected int x = 0;
+    //protected int y = 0;
     private int deep = 0;
 
 
@@ -44,14 +44,22 @@ public class SA_Obj implements Essential{
 
     protected int SA_COLOR_RED = Color.RED;
     protected int SA_COLOR_BLACK = Color.BLACK;
+    protected int SA_COLOR_WHITE = Color.WHITE;
+    protected int SA_COLOR_GRAY = Color.GRAY;
 
 
+    protected int SA_FILLEDGE;
+    protected int SA_FILL;
     protected int SA_EDGE;
 
 
     protected int SA_MASK_RECT;
     protected int SA_MASK_CIRCLE;
     protected int SA_MASK_AUTO;
+
+
+    protected int SA_SCROLL_HORIZONTAL;
+    protected int SA_SCROLL_VERTICAL;
 
 
 
@@ -69,6 +77,8 @@ public class SA_Obj implements Essential{
         SA_CAMERA_CENTERX = engine.getWindowWidth()/2;
         SA_CAMERA_CENTERY = engine.getWindowHeight()/2;
 
+        SA_FILLEDGE = SA_FLAG.ENGINE_DRAW_OPTION_FILLEDGE;
+        SA_FILL = SA_FLAG.ENGINE_DRAW_OPTION_FILL;
         SA_EDGE = SA_FLAG.ENGINE_DRAW_OPTION_EDGE;
 
 
@@ -77,6 +87,11 @@ public class SA_Obj implements Essential{
         SA_MASK_RECT = SA_FLAG.ENGINE_MASK_CREATE_RECT;
         SA_MASK_CIRCLE = SA_FLAG.ENGINE_MASK_CREATE_CIRCLE;
         SA_MASK_AUTO = SA_FLAG.ENGINE_MASK_CREATE_AUTO;
+
+        SA_SCROLL_HORIZONTAL = SA_FLAG.ENGINE_OBJECT_SCROLL_HORIZONTAL;
+        SA_SCROLL_VERTICAL = SA_FLAG.ENGINE_OBJECT_SCROLL_VERTICAL;
+
+
 
         //userFlag값 지정-----------------------------
 
@@ -91,8 +106,6 @@ public class SA_Obj implements Essential{
         //부모가 없으면 등록
 
         _Draw();
-
-
     }
 
     @Override
@@ -105,7 +118,12 @@ public class SA_Obj implements Essential{
 
     }
 
-    public void SA_RootParent(boolean rootParent) {
+    @Override
+    public void _Start() {
+        Log.e("애는 Obj", name);
+    }
+
+    protected void SA_RootParent(boolean rootParent) {
         this.rootParent = rootParent;
     }
 
@@ -116,103 +134,122 @@ public class SA_Obj implements Essential{
         return obj;
     }
 
+    //point
+    //cpoint
+    //center
+    //ccenter
+    //length
+    //clength
 
+
+
+
+    //스프라이트, index, speed, x, y, alpha
+    //index = 해당 인덱스부터 재생
+    //index =  음수 -> 해당 인덱스부터 역재생
+    //speed = 0 정지
+    //speed = 1 재생
+    //speed = 음수 -> 한번만 하고 종료
 
 
 
     //sprite
-
-
-    protected SA_Draw SA_Draw_Sprite_Center(String name, String sprite, int deep, int index, double speed, int centerX, int centerY, int width, int height){
-        //스프라이트, index, speed, x, y, alpha
-        //index = 해당 인덱스부터 재생
-        //index =  음수 -> 해당 인덱스부터 역재생
-        //speed = 0 정지
-        //speed = 1 재생
-        //speed = 음수 -> 한번만 하고 종료
-
-
+    protected SA_Draw SA_Draw_Sprite(String name, String sprite, int deep, int index, double speed, int standardX, int standardY, int width_endX, int hegith_endY){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        return drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_RELATIVE, SA_FLAG.ENGINE_DRAW_SPRITE_CREATE, SA_FLAG.PARAM_POS_CENTER, name, deep, sprite, index, speed, centerX, centerY, width, height));
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitSprite(sprite, index, speed, width_endX, hegith_endY, ""));
     }
-
-
-
-
-    protected void SA_Draw_Sprite(String name, String sprite, int deep, int index, double speed, int startX, int startY, int width, int height){
-        //스프라이트, index, speed, x, y, alpha
-        //index = 해당 인덱스부터 재생
-        //index =  음수 -> 해당 인덱스부터 역재생
-        //speed = 0 정지
-        //speed = 1 재생
-        //speed = 음수 -> 한번만 하고 종료
-
-
+    protected SA_Draw SA_Draw_Sprite(String name, String sprite, int deep, int index, double speed, int standardX, int standardY, int width_endX, int hegith_endY, String option){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_RELATIVE, SA_FLAG.ENGINE_DRAW_SPRITE_CREATE, SA_FLAG.PARAM_POS_LENGTH, name, deep, sprite, index, speed, startX, startY, width, height));
-
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitSprite(sprite, index, speed, width_endX, hegith_endY, option));
     }
 
-    protected SA_Draw SA_Draw_Sprite_Camera_Center(String name, String sprite, int deep, int index, double speed, int centerX, int centerY, int width, int height){
-        //스프라이트, index, speed, x, y, alpha
-        //index = 해당 인덱스부터 재생
-        //index =  음수 -> 해당 인덱스부터 역재생
-        //speed = 0 정지
-        //speed = 1 재생
-        //speed = 음수 -> 한번만 하고 종료
+    protected void SA_Draw_Sprite_Change(String name, String changeSpriteName){
+        drawManager.search(name).spriteChange(changeSpriteName);
+    }
 
-
+    //rect
+    protected SA_Draw SA_Draw_Rect(String name, int deep, int standardX, int standardY, int width_endX, int hegith_endY, String color){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        return drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_CAMERA, SA_FLAG.ENGINE_DRAW_SPRITE_CREATE, SA_FLAG.PARAM_POS_CENTER, name, deep, sprite, index, speed, centerX, centerY, width, height));
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitRect(width_endX, hegith_endY, color, ""));
     }
-
-
-//    protected  void SA_Draw_Camera_Rect(String name, int deep, int option, int startX, int startY, int width, int height, int alpha, int color){
-//        if(drawManager == null)
-//            drawManager = new SA_DrawManager();
-//        drawManager.add(new SA_Draw(SA_FLAG.ENGINE_DRAW_RECT_CREATE, SA_FLAG.ELSE_NOTHING, engine, name, deep, option, startX, startY, width, height, alpha, color));
-//    }
-
-
-    protected SA_Draw SA_Draw_Rect_Camera_Center(String name, int deep, int drawOption, int centerX, int centerY, int width, int height, int color, int thickness){
+    protected SA_Draw SA_Draw_Rect(String name, int deep, int standardX, int standardY, int width_endX, int hegith_endY, String color, String option){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        return drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_CAMERA, SA_FLAG.ENGINE_DRAW_RECT_CREATE, SA_FLAG.PARAM_POS_CENTER, name, deep, drawOption, centerX, centerY, width, height, color, thickness));
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitRect(width_endX, hegith_endY, color, option));
     }
 
-
-    protected SA_Draw SA_Draw_Line(String name, int deep, int startX, int startY, int endX, int endY, int color, int thickness){
+    //roundrect
+    protected SA_Draw SA_Draw_RoundRect(String name, int deep, int standardX, int standardY, int width_endX, int hegith_endY, int radius, String color){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        return drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_RELATIVE, SA_FLAG.ENGINE_DRAW_LINE_CREATE, SA_FLAG.PARAM_POS_LENGTH, name, deep, startX, startY, endX, endY, color, thickness));
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitRoundRect(width_endX, hegith_endY, radius, color, ""));
     }
-
-    protected SA_Draw SA_Draw_Line_Camera_Point(String name, int deep, int startX, int startY, int endX, int endY, int color, int thickness){
+    protected SA_Draw SA_Draw_RoundRect(String name, int deep, int standardX, int standardY, int width_endX, int hegith_endY, int radius, String color, String option){
         if(drawManager == null)
             drawManager = new SA_DrawManager();
-        return drawManager.add(new SA_Draw(this, SA_FLAG.ENGINE_DRAW_OPTION_CAMERA, SA_FLAG.ENGINE_DRAW_LINE_CREATE, SA_FLAG.PARAM_POS_POINT2POINT, name, deep, startX, startY, endX, endY, color, thickness));
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitRoundRect(width_endX, hegith_endY, radius, color, option));
+    }
+
+    //circle
+    protected SA_Draw SA_Draw_Circle(String name, int deep, int standardX, int standardY, int radius, String color){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitCircle(radius, color, ""));
+    }
+    protected SA_Draw SA_Draw_Circle(String name, int deep, int standardX, int standardY, int radius, String color, String option){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitCircle(radius, color, option));
+    }
+
+    //line
+    protected SA_Draw SA_Draw_Line(String name, int deep, int startX, int startY, int endX, int endY, String color, int thickness){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, startX, startY)
+                .InitLine(endX, endY, color, thickness, ""));
+    }
+    protected SA_Draw SA_Draw_Line(String name, int deep, int startX, int startY, int endX, int endY, String color, int thickness, String option){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, startX, startY)
+                .InitLine(endX, endY, color, thickness, option));
     }
 
 
-    public void SA_Engine_Click(String clickOption){
-        try {
-            Object clickObject = hashMap_ClickListener.get(clickOption);
-            Method method = clickObject.getClass().getDeclaredMethod(clickOption);
-            method.setAccessible(true);
-            method.invoke(clickObject);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+    //text
+    protected SA_Draw SA_Draw_Text(String name, int deep, int standardX, int standardY, String text, String color, int fintSize){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitText(text, color, fintSize, ""));
+    }
+    protected SA_Draw SA_Draw_Text(String name, int deep, int standardX, int standardY, String text, String color, int fintSize, String option){
+        if(drawManager == null)
+            drawManager = new SA_DrawManager();
+        return drawManager.add(new SA_Draw(this, name, deep, standardX, standardY)
+                .InitText(text, color, fintSize, option));
     }
 
+    //destroy
+    protected void SA_Draw_Destroy(String name){
+        if(drawManager.destroy(name) == 0)
+            drawManager = null;
+    }
+
+
+    //click
     protected void SA_Click(String name, Object clickClass){
         if(hashMap_ClickListener == null) hashMap_ClickListener = new HashMap<>();
         hashMap_ClickListener.put(name, clickClass);//리스너 등록"이름"으로 되있음
@@ -221,24 +258,40 @@ public class SA_Obj implements Essential{
         draw.setOn(true);
     }
 
-
+    //mask
     protected void SA_Mask(String name, int maskType){
         drawManager.search(name).SetMask(maskType);
     }
 
 
     public void parentPos(Point p){
-        p.x += x;
-        p.y += y;
+        p.x += pos.x;
+        p.y += pos.y;
         if(parent != null)
             parent.parentPos(p);
     }
 
+    protected void SA_Draw_Move(String name, int x, int y){
+        drawManager.search(name).Move(x, y);
+    }
 
 
+    //Log
+    protected void Log(Object text){
+        engine.getDebug().Log(text);
+    }
+
+    protected void SetPos(int x, int y){
+        pos.x = x;
+        pos.y = y;
+    }
 
     protected void SA_Draw_SetDeep(String name, int deep){
 
+    }
+
+    public Point getPos() {
+        return pos;
     }
 
     protected void SA_Deep(int deep){
@@ -246,15 +299,6 @@ public class SA_Obj implements Essential{
         //deep sort해야됨
     }
 
-    protected void SA_Draw_Text(boolean relative, int x, int y, int color, String text){
-        if(drawManager == null)
-            drawManager = new SA_DrawManager();
-        //위치,
-    }
-
-    public SA_DrawManager getDrawManager() {
-        return drawManager;
-    }
 
     public void setParent(SA_ObjManager parent) {
         parent = new SA_ObjManager(null);
@@ -276,20 +320,11 @@ public class SA_Obj implements Essential{
             drawManager.draw(canvas);
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public boolean checkClick(int clickX, int clickY) {
         String click = null;
         if(drawManager != null){
             click = drawManager.checkClick(clickX, clickY);
         }
-        click = click;
         if(click == null){
             //더탐색
             if(child == null) return false;
@@ -302,8 +337,6 @@ public class SA_Obj implements Essential{
                 Method method = clickObject.getClass().getDeclaredMethod("Click", Object.class);
                 method.setAccessible(true);
                 method.invoke(clickObject, this);
-
-                Log.e(click, "크크크크크크크" + click);
                 return true;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();

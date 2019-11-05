@@ -1,12 +1,12 @@
-package com.example.an.sa_engine.User.Instance.character.foot;
-
+package com.example.an.sa_engine.SA_ENGINE.Object.Scroll;
 
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
 
-public class Foot extends SA_Obj {
+public class SA_ScrollBar extends SA_Obj{
+
     @Override
     public void _Create(String name) {
-        super._Create("발");
+        super._Create(name);
     }
 
     @Override

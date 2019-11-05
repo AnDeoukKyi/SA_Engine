@@ -16,16 +16,18 @@ public class SA_Mask {
         this.draw = draw;
         switch(maskType){
             case SA_FLAG.ENGINE_MASK_CREATE_AUTO:
+            case SA_FLAG.ENGINE_MASK_CREATE_RECT:
                 setPoint();
                 break;
+
         }
         maskManager.setNode();
     }
 
     private void setPoint(){
         switch (draw.getDrawType()) {
-            case SA_FLAG.ENGINE_DRAW_SPRITE_CREATE:
-            case SA_FLAG.ENGINE_DRAW_RECT_CREATE:
+            case SA_FLAG.ENGINE_DRAW_CREATE_SPRITE:
+            case SA_FLAG.ENGINE_DRAW_CREATE_RECT:
                 maskManager.add(draw.getStartX(), draw.getStartY());
                 maskManager.add(draw.getEndX(), draw.getStartY());
                 maskManager.add(draw.getEndX(), draw.getEndY());
@@ -35,6 +37,12 @@ public class SA_Mask {
         maskManager.setRelative();
         relativeX = maskManager.getRelativeX();
         relativeY = maskManager.getRelativeY();
+    }
+
+    public void Move(int x, int y){
+        maskManager.Move(x, y);
+        relativeX += x;
+        relativeY += y;
     }
 
     public SA_MaskManager getMaskManager() {

@@ -1,10 +1,9 @@
-package com.example.an.sa_engine.SA_ENGINE.System.Debug.Log;
-
-import android.util.Log;
+package com.example.an.sa_engine.SA_ENGINE.System.Debug.Menu;
 
 import com.example.an.sa_engine.SA_ENGINE.Object.Click.SA_Click;
+import com.example.an.sa_engine.SA_ENGINE.System.Debug.Log.SA_Debug_Log;
 
-public class SA_Debug_Log_Click extends SA_Click {
+public class SA_Debug_Menu_Click extends SA_Click {
 
     private boolean click = false;
 
@@ -13,11 +12,11 @@ public class SA_Debug_Log_Click extends SA_Click {
         super.Click(targetObj);
 
         if(click) {
-            ((SA_Debug_Log) targetObj).Close();
+            ((SA_Debug_Menu) targetObj).MenuClose();
             click = false;
         }
         else {
-            ((SA_Debug_Log) targetObj).Open();
+            ((SA_Debug_Menu) targetObj).MenuOpen();
             click = true;
         }
     }

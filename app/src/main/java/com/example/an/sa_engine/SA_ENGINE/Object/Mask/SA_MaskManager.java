@@ -26,11 +26,11 @@ public class SA_MaskManager {
             }
         }
         if(click){
-            Log.e("click했엉", Boolean.toString(click));
+            //Log.e("click했엉", Boolean.toString(click));
             return true;
         }
         else{
-            Log.e("click아니얌", Boolean.toString(click));
+            //Log.e("click아니얌", Boolean.toString(click));
             return false;
             //다른 오브젝트까지 검사해야됨
         }
@@ -133,4 +133,9 @@ public class SA_MaskManager {
             return p1.getY() - p2.getY();
         }
     };
+
+    public void Move(int x, int y) {
+        relativeX += x;
+        relativeY += y;
+    }
 }

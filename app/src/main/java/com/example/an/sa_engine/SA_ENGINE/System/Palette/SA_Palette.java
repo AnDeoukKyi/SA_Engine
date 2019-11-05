@@ -1,11 +1,17 @@
 package com.example.an.sa_engine.SA_ENGINE.System.Palette;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.graphics.Color;
 
 import com.example.an.sa_engine.SA_ENGINE.System.Engine.SA_Engine;
 import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
@@ -27,19 +33,18 @@ public class SA_Palette extends View {
         engine = SA_Engine.getEngine();
         printWindowSize = engine.isPrintWindowSize();
         paint = new Paint();
-        paint.setTextSize(20);
+        paint.setTextSize(30);
     }
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         engine.getObjMaster().draw(canvas);
-//        canvas.drawText("(" + Integer.toString(engine.getWindowWidth()) + "," + Integer.toString(engine.getWindowHeight()) + ")"
-//                , engine.getWindowWidth()/2, engine.getWindowHeight()/2, paint);
-
 
         invalidate();
-
     }
+
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

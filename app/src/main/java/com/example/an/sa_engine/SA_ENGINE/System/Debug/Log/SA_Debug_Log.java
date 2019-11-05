@@ -1,38 +1,53 @@
 package com.example.an.sa_engine.SA_ENGINE.System.Debug.Log;
 
+import android.util.Log;
+
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
 
 public class SA_Debug_Log extends SA_Obj{
 
+
+    private SA_Debug_Log_Manager logManager;
+
+    private SA_Debug_Log_Scroll logScroll;
+
+
     @Override
     public void _Create(String name) {
-        super._Create("디버그로그");
-        //이름, 태그 설정
+        super._Create("로그");
         SA_RootParent(true);
-        SA_Child(new SA_Debug_Log1());
-
-        x = 100;
-        y = 100;
-
+        logScroll = (SA_Debug_Log_Scroll)SA_Child(new SA_Debug_Log_Scroll());
     }
 
     @Override
     public void _Draw() {
         super._Draw();
-        for(int i = 0; i<=SA_CAMERA_ENDX/100; i++){
-            SA_Draw_Line_Camera_Point("선", 9, i*100, 0, i*100, SA_CAMERA_ENDY, SA_COLOR_BLACK, 3);
-        }
 
-        for(int i = 0; i<=SA_CAMERA_ENDY/100; i++){
-            SA_Draw_Line_Camera_Point("선", 9, 0, i*100, SA_CAMERA_ENDX, i*100, SA_COLOR_BLACK, 3);
-        }
+//        SA_Draw_Sprite("숨김버튼화살표", "sa_engine_arrow_up", 10, 0, 0, SA_CAMERA_CENTERX, SA_CAMERA_ENDY, 30, 30, "camera, pos=b/c");
+        //SA_Draw_Rect("숨김버튼", 10, 100, 100, 100, 100, "red", "thickness=3, incolor=black,camera").changeRoundRect(30);
+//        SA_Draw_Circle("원", 10, 100, 100, 150, "red");
+//        SA_Draw_Line("선", 12, 100, 100, 200, 200, "red", 3);
+        //SA_Draw_Text("글자", 10, 300, 300, "asdfasdf!", "red", 30, "background=black");
+        //SA_Draw_Text("글자", 10, 500, 500, "asdaefaefaefaefaefaefaef", "red", 30, "width=100,pos=m/c");
+        //SA_Draw_RoundRect("숨김버튼", 15, 100, 100, 100, 100, 30, "red", "thickness=3,incolor=black");
+        //테두리만 그리는 경우 thickness
+        //테두리 안쪽 다그리는 경우 thickness incolor
+        //안쪽만 그리는 경우
+
+
+        //"edge, incolor=#121313
+        //"edge"
+        //SA_Mask("숨김버튼", SA_MASK_RECT);
+        //SA_Click("숨김버튼", new SA_Debug_Log_Click());
+
+
+        //SA_Draw_Text_Point_Camera("adsfasdfasdf", 10, 300, 300, "adsfadsfadsfy", SA_COLOR_BLACK, 40);
 
 
 
-
-        SA_Draw_Sprite_Camera_Center("asdf", "sprite0", 10, 0, 0, 0, 0, 200, 200);
-        SA_Mask("asdf", SA_MASK_AUTO);
-        SA_Click("asdf", new SA_Debug_Log_Click());
+//        SA_Draw_Sprite_Camera_Center("asdf", "sprite0", 10, 0, 0, 0, 0, 200, 200);
+//        SA_Mask("asdf", SA_MASK_AUTO);
+//        SA_Click("asdf", new SA_Debug_Log_Click());
 
         int a = 10;
 
@@ -64,16 +79,25 @@ public class SA_Debug_Log extends SA_Obj{
         //SA_Child(new Hand("손", this));
     }
 
+    @Override
+    public void _Start() {
+        super._Start();
+        Log.e("asdfff", "start실행");
+    }
+
     public void Open(){
+        SA_Draw_Move("숨김버튼", 0, -200);
+        SA_Draw_Move("숨김버튼화살표", 0, -200);
+        SA_Draw_Sprite_Change("숨김버튼화살표", "sa_engine_arrow_down");
+        logManager.Open();
 
     }
 
     public void Close(){
-
+        SA_Draw_Move("숨김버튼", 0, 200);
+        SA_Draw_Move("숨김버튼화살표", 0, 200);
+        SA_Draw_Sprite_Change("숨김버튼화살표", "sa_engine_arrow_up");
+        logManager.Close();
     }
 
-
-    public void test(){
-        //x++;
-    }
 }

@@ -45,6 +45,4 @@ public class SA_MaskPoint {
         x -= minX;
         y -= minY;
     }
-
-
 }

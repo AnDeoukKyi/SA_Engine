@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.example.an.sa_engine.SA_ENGINE.Object.Camera.SA_Camera;
 import com.example.an.sa_engine.SA_ENGINE.Object.Draw.SA_Draw;
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_Obj;
 import com.example.an.sa_engine.SA_ENGINE.Object.Obj.SA_ObjMaster;
@@ -37,6 +38,10 @@ public class SA_Engine{//singleton
     //
 
 
+    //camera
+    private SA_Camera camera;
+
+
     //click
     private int maskLength = 100;
 
@@ -51,7 +56,6 @@ public class SA_Engine{//singleton
 
 
 
-    public int cameraX = 100, cameraY = 100;
 
 
 
@@ -63,6 +67,7 @@ public class SA_Engine{//singleton
         hashMap_Flag = new HashMap<>();
         new SA_UserOptionManager().getHashMapFlag(this);
         objMaster = new SA_ObjMaster(this);
+        camera = new SA_Camera();
         packageName = context.getPackageName();
         //Thread();
     }
@@ -77,23 +82,18 @@ public class SA_Engine{//singleton
 
         //화면출력해야됨
 
-//        new Thread(new Runnable() {
-//            public void run() {
-//                while (true) {
-//                    try {
-//                        cameraX--;
-//                        cameraY--;
-//                        Thread.sleep(10);
-//                    } catch (Throwable t) {
-//                    }
-//                }
-//            }
-//        }).start();
 
-
-
-
-
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        objMaster.run();
+                        Thread.sleep(10);
+                    } catch (Throwable t) {
+                    }
+                }
+            }
+        }).start();
     }
 //
 //    public void Thread(){
@@ -165,7 +165,7 @@ public class SA_Engine{//singleton
                     preClickX = -100;
                     preClickY = -100;
                     this.touch = false;
-                    Log.e("클릭함", Integer.toString(clickX) + "," + Integer.toString(clickY));
+                    //Log.e("클릭함", Integer.toString(clickX) + "," + Integer.toString(clickY));
                     Touch_Obj(clickX, clickY);
                 }
                 else{
@@ -173,7 +173,7 @@ public class SA_Engine{//singleton
                     preClickY = -100;
                     this.touch = false;
                     this.drag = false;
-                    Log.e("드래그끝", Integer.toString(clickX) + "," + Integer.toString(clickY));
+                    //Log.e("드래그끝", Integer.toString(clickX) + "," + Integer.toString(clickY));
                 }
 
 
@@ -222,7 +222,9 @@ public class SA_Engine{//singleton
     }
 
 
-
+    public SA_Debug getDebug() {
+        return debug;
+    }
 
     private void DebugMode(boolean flag){
         debugMode = flag;
@@ -242,6 +244,10 @@ public class SA_Engine{//singleton
         if(getFlag("USER_VIEW_WINDOWSIZE_X") != windowWidth || getFlag("USER_VIEW_WINDOWSIZE_Y") != windowHeight){
             //Log.r("User-Option-Option.class의 View_WindowSize(0 0)을 View_WindowSize(1230, 300)으로 변경해주세요.");
             //올스톱
+
+
+            //text임
+            new SA_RoomManager();//룸메니저 생성->룸시작함
         }
         else{
 
@@ -260,6 +266,8 @@ public class SA_Engine{//singleton
     public int getWindowHeight() {
         return windowHeight;
     }
+
+
 
     public boolean isPrintWindowSize() {
         return printWindowSize;
@@ -286,6 +294,16 @@ public class SA_Engine{//singleton
 
     public Resources getResources() {
         return resources;
+    }
+
+
+
+    public void setCamera(SA_Camera camera) {
+        this.camera = camera;
+    }
+
+    public SA_Camera getCamera() {
+        return camera;
     }
 
     //엔진 호출

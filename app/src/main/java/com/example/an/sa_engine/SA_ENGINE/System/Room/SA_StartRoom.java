@@ -14,10 +14,8 @@ import com.example.an.sa_engine.SA_ENGINE.System.Option.SA_FLAG;
 
 
 public class SA_StartRoom extends AppCompatActivity {
+
     private SA_Engine engine;
-
-
-    private RelativeLayout debugLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +23,6 @@ public class SA_StartRoom extends AppCompatActivity {
         Init();
         setContentView(R.layout.activity_sa_startroom);
         engine.Init_2();
-
     }
 
 

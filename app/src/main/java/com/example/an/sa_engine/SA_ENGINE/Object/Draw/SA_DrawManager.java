@@ -48,12 +48,20 @@ public class SA_DrawManager {
     }
 
     public String checkClick(int clickX, int clickY){
-
         for(int i = 0; i<AL_Draw.size(); i++){
             if(((SA_Draw)AL_Draw.get(i)).isClick()){
                 return ((SA_Draw)AL_Draw.get(i)).checkClick(clickX, clickY);
             }
         }
         return null;
+    }
+
+    public int destroy(String name) {
+        for(int i = 0; i<AL_Draw.size(); i++) {
+            if (((SA_Draw) AL_Draw.get(i)).getName().equals(name)) {
+                AL_Draw.remove(i);
+            }
+        }
+        return AL_Draw.size();
     }
 }

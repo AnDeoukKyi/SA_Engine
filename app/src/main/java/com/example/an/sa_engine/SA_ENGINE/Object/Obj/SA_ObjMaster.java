@@ -42,6 +42,10 @@ public class SA_ObjMaster {
         objManager.checkClick(clickX, clickY);
     }
 
+    public void run() {
+        objManager.run();
+    }
+
 
 //    private int search(SA_Obj obj){
 //        Iterator iterator = HashMap_Obj.entrySet().iterator();
